@@ -65,24 +65,28 @@ print(f"Opposing team is {opposing_team.playing}")
 
 # beginning game
 wickets = len(user_team.player_names) - 1
-balls = 6
+balls = 12
 
 player = Player(user_team.player_names, opposing_team.player_names)
+position = 0
 
 while balls != 0: 
     if user_team.playing == "Batting":
         user_batsmen = user_team.player_names
         playing_batsmen = user_batsmen[:1]
-        current_batsman = playing_batsmen[0]
+        current_batsman = player.user_players[position]
         run = randint(0,7)
         if run != 7:
-            print(f"Wow! Your player scored {run} runs")
+            print(f"Wow! {current_batsman} scored {run} runs")
             if run in [1, 3, 5]:
-                pass
                 # player change
+                position += 1
+                if position > 1:
+                    position=0
+                current_batsman = player.user_players[position]
             else:
                 pass
-                # player remains same
+                current_batsman = player.user_players[position]
         elif run == 7:
             print("Out!!")
             # and player changes to a player that was previously NOT in the "playing batsmen" list
